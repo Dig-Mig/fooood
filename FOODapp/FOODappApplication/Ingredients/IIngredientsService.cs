@@ -8,5 +8,6 @@ public interface IIngredientsService
     Task<Ingredient>? GetIngredient(int id);
     Task<Ingredient> CreateIngredient(IngredioentDTO ingredientDTO);
     
+    Task<int?> DeleteIngredientById(int id);
      
 }

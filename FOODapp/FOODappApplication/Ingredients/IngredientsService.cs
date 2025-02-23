@@ -28,6 +28,12 @@ public class IngredientsService: IIngredientsService
         return await _repository.PostIngredient(ingredient);
     }
 
+
+    public async Task<int?> DeleteIngredientById(int id)
+    {
+        return await _repository.DeleteIngredientById(id);
+    }
+    
     private Ingredient MapFromDTO(IngredioentDTO ingredientDTO)
     {
         var ingredient = new Ingredient()
@@ -36,5 +42,6 @@ public class IngredientsService: IIngredientsService
         };
         return ingredient;
     }
+    
 
 }
