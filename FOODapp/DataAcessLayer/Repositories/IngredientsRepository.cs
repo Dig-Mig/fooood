@@ -30,9 +30,9 @@ public class IngredientsRepository: IIngredientsRepository
         return await _context.Ingredients.FindAsync(id);
     }
 
-    public async Task<int?> DeleteIngredientById(int id)
+    public async Task<int?> DeleteIngredient(Ingredient ingredient)
     {
-        _context.Ingredients.Remove(new Ingredient { Id = id });
+        _context.Ingredients.Remove(ingredient);
         return await _context.SaveChangesAsync();
     }
 }

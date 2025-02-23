@@ -8,5 +8,5 @@ public interface IIngredientsRepository
     Task<List<Ingredient>> GetAllIngredients();
     Task<Ingredient?> GetIngredientById(int id);
     
-    Task<int?> DeleteIngredientById(int id);
+    Task<int?> DeleteIngredient(Ingredient ingredient);
 }

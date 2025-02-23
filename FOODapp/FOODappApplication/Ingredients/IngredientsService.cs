@@ -31,7 +31,10 @@ public class IngredientsService: IIngredientsService
 
     public async Task<int?> DeleteIngredientById(int id)
     {
-        return await _repository.DeleteIngredientById(id);
+        var ingredient = await _repository.GetIngredientById(id);
+        if (ingredient == null) return null;
+        else { return await _repository.DeleteIngredient(ingredient); }
+        
     }
     
     private Ingredient MapFromDTO(IngredioentDTO ingredientDTO)
