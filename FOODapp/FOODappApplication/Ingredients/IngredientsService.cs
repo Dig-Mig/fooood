@@ -5,8 +5,8 @@ namespace FOODappApplication;
 
 public class IngredientsService: IIngredientsService
 {
-    private IngredientsRepository _repository;
-    public IngredientsService(IngredientsRepository repository)
+    private IIngredientsRepository _repository;
+    public IngredientsService(IIngredientsRepository repository)
     {
            _repository = repository; 
     }
@@ -15,18 +15,11 @@ public class IngredientsService: IIngredientsService
         return await _repository.GetAllIngredients();
     }
     
-    public string? GetIngredient(int id)
+    public async Task<Ingredient> GetIngredient(int id)
     {
-        var ingredients = new List<string>
-        {
-            "Apple",
-            "Bananas",
-            "Pineapple",
-            "Orange",
-            
-        };
+        var ingredient = await _repository.GetIngredientById(id);
     
-        return ingredients[id] ?? null;
+        return  ingredient;
     }
 
     public async Task<Ingredient> CreateIngredient(IngredioentDTO ingredientDTO)

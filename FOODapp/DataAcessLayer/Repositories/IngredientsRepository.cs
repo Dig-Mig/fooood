@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAcessLayer.Repositories;
 
-public class IngredientsRepository
+public class IngredientsRepository: IIngredientsRepository
 {
     private readonly FOODContext _context;
 
@@ -24,5 +24,9 @@ public class IngredientsRepository
     {
         return await _context.Ingredients.ToListAsync();
     }
-    
+
+    public async Task<Ingredient>? GetIngredientById(int id)
+    {
+        return await _context.Ingredients.FindAsync(id);
+    }
 }
