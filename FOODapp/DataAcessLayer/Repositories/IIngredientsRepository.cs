@@ -9,4 +9,5 @@ public interface IIngredientsRepository
     Task<Ingredient?> GetIngredientById(int id);
     
     Task<int?> DeleteIngredient(Ingredient ingredient);
+    Task<Ingredient?> UpdateIngredient(Ingredient ingredient);
 }

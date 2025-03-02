@@ -42,8 +42,11 @@ namespace FOODappAPI.Controllers
 
         // PUT api/<api>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] IngredioentDTO ingredientDTO)
         {
+            var status = await _ingredientsService.UpdateIngredientById(id, ingredientDTO);
+            
+            return status == null ? NotFound() : Ok(status);
         }
 
         // DELETE api/<api>/5

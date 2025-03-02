@@ -29,6 +29,13 @@ public class IngredientsRepository: IIngredientsRepository
     {
         return await _context.Ingredients.FindAsync(id);
     }
+    
+    public async Task<Ingredient?> UpdateIngredient(Ingredient ingredient)
+    {   
+        _context.Ingredients.Update(ingredient);
+        await _context.SaveChangesAsync();
+        return ingredient;
+    }
 
     public async Task<int?> DeleteIngredient(Ingredient ingredient)
     {

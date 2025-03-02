@@ -37,11 +37,30 @@ public class IngredientsService: IIngredientsService
         
     }
     
+    public async Task<Ingredient?> UpdateIngredientById(int id, IngredioentDTO ingredientUpdates)
+    {
+        var ingredient = await _repository.GetIngredientById(id);
+        if (ingredient == null) return null;
+
+        if (ingredientUpdates.Name is not null) ingredient.Name = ingredientUpdates.Name;
+        if (ingredientUpdates.Stock is not null) ingredient.Stock = ingredientUpdates.Stock;
+        if (ingredientUpdates.Quantity is not null) ingredient.Quantity = ingredientUpdates.Quantity;
+        if (ingredientUpdates.QuantityUnit is not null) ingredient.QuantityUnit = ingredientUpdates.QuantityUnit;
+        
+        
+        return  await _repository.UpdateIngredient(ingredient);
+        
+    }
+    
+    
     private Ingredient MapFromDTO(IngredioentDTO ingredientDTO)
     {
         var ingredient = new Ingredient()
         {
-            Name = ingredientDTO.Name
+            Name = ingredientDTO.Name,
+            Stock = ingredientDTO.Stock,
+            Quantity = ingredientDTO.Quantity,
+            QuantityUnit = ingredientDTO.QuantityUnit
         };
         return ingredient;
     }
