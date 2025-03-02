@@ -25,7 +25,7 @@ public class IngredientsRepository: IIngredientsRepository
         return await _context.Ingredients.ToListAsync();
     }
 
-    public async Task<Ingredient>? GetIngredientById(int id)
+    public async Task<Ingredient?> GetIngredientById(int id)
     {
         return await _context.Ingredients.FindAsync(id);
     }

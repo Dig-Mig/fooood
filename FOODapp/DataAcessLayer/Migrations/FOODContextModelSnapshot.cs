@@ -26,6 +26,16 @@ namespace DataAcessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("QuantityUnit")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Stock")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Ingredients");
