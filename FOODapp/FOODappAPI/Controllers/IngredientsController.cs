@@ -1,8 +1,7 @@
-using DataAcessLayer.Data;
 using DataAcessLayer.Models;
 using DataAcessLayer.Repositories;
 using FOODappApplication;
-using Microsoft.AspNetCore.Http;
+using FOODappApplication.Ingredients;
 using Microsoft.AspNetCore.Mvc;
 namespace FOODappAPI.Controllers
 {
@@ -10,7 +9,7 @@ namespace FOODappAPI.Controllers
     [ApiController]
     public class IngredientsController : ControllerBase
     {
-        private IIngredientsService _ingredientsService;
+        private readonly IIngredientsService _ingredientsService;
         
         public IngredientsController(IIngredientsRepository ingredientsRepository)
         {
@@ -35,18 +34,19 @@ namespace FOODappAPI.Controllers
 
         // POST api/<api>
         [HttpPost]
-        public void Post([FromBody] IngredioentDTO ingredientDTO)
+        public async Task<IActionResult> Post([FromBody] IngredientDTO ingredientDTO)
         {
-            _ingredientsService.CreateIngredient(ingredientDTO);
+            var ingredient =  _ingredientsService.CreateIngredient(ingredientDTO);
+            return ingredient == null ? Problem() : Ok(ingredient);
         }
 
         // PUT api/<api>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] IngredioentDTO ingredientDTO)
+        public async Task<IActionResult> Put(int id, [FromBody] IngredientDTO ingredientDTO)
         {
-            var status = await _ingredientsService.UpdateIngredientById(id, ingredientDTO);
+            var ingredient = await _ingredientsService.UpdateIngredientById(id, ingredientDTO);
             
-            return status == null ? NotFound() : Ok(status);
+            return ingredient == null ? NotFound() : Ok(ingredient);
         }
 
         // DELETE api/<api>/5

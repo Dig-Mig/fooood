@@ -1,7 +1,7 @@
 ﻿using DataAcessLayer.Models;
 using DataAcessLayer.Repositories;
 
-namespace FOODappApplication;
+namespace FOODappApplication.Ingredients;
 
 public class IngredientsService: IIngredientsService
 {
@@ -18,13 +18,12 @@ public class IngredientsService: IIngredientsService
     public async Task<Ingredient> GetIngredient(int id)
     {
         var ingredient = await _repository.GetIngredientById(id);
-    
         return  ingredient;
     }
 
-    public async Task<Ingredient> CreateIngredient(IngredioentDTO ingredientDTO)
+    public async Task<Ingredient> CreateIngredient(IngredientDTO ingredientDTO)
     {   
-        var ingredient =MapFromDTO(ingredientDTO);
+        var ingredient = MapFromDTO(ingredientDTO);
         return await _repository.PostIngredient(ingredient);
     }
 
@@ -37,7 +36,7 @@ public class IngredientsService: IIngredientsService
         
     }
     
-    public async Task<Ingredient?> UpdateIngredientById(int id, IngredioentDTO ingredientUpdates)
+    public async Task<Ingredient?> UpdateIngredientById(int id, IngredientDTO ingredientUpdates)
     {
         var ingredient = await _repository.GetIngredientById(id);
         if (ingredient == null) return null;
@@ -46,14 +45,12 @@ public class IngredientsService: IIngredientsService
         if (ingredientUpdates.Stock is not null) ingredient.Stock = ingredientUpdates.Stock;
         if (ingredientUpdates.Quantity is not null) ingredient.Quantity = ingredientUpdates.Quantity;
         if (ingredientUpdates.QuantityUnit is not null) ingredient.QuantityUnit = ingredientUpdates.QuantityUnit;
-        
-        
-        return  await _repository.UpdateIngredient(ingredient);
-        
+
+        return await _repository.UpdateIngredient(ingredient);
     }
     
     
-    private Ingredient MapFromDTO(IngredioentDTO ingredientDTO)
+    private Ingredient MapFromDTO(IngredientDTO ingredientDTO)
     {
         var ingredient = new Ingredient()
         {

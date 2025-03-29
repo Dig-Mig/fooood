@@ -12,13 +12,6 @@ public class IngredientsRepository: IIngredientsRepository
     {
         _context = context;
     }
-
-    public async Task<Ingredient> PostIngredient(Ingredient ingredient)
-    {
-        _context.Ingredients.Add(ingredient);
-        await _context.SaveChangesAsync();
-        return ingredient;
-    }
     
     public async Task<List<Ingredient>> GetAllIngredients( )
     {
@@ -28,6 +21,13 @@ public class IngredientsRepository: IIngredientsRepository
     public async Task<Ingredient?> GetIngredientById(int id)
     {
         return await _context.Ingredients.FindAsync(id);
+    }
+    
+    public async Task<Ingredient> PostIngredient(Ingredient ingredient)
+    {
+        _context.Ingredients.Add(ingredient);
+        await _context.SaveChangesAsync();
+        return ingredient;
     }
     
     public async Task<Ingredient?> UpdateIngredient(Ingredient ingredient)
