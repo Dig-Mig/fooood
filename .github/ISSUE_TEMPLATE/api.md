@@ -1,7 +1,7 @@
 ---
 name: API
 about: Template for Endpoints in the API
-title: 'Endpoint - '
+title: API
 labels: ''
 assignees: ''
 
