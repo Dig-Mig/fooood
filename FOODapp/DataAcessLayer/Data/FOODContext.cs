@@ -9,6 +9,7 @@ public class FOODContext : DbContext
     
     public DbSet<Ingredient> Ingredients { get; set; } = null!;
     public DbSet<Recipe> Recipes { get; set; } = null!;
+    public DbSet<RecipeIngredient> RecipeIngredients { get; set; } = null!;
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

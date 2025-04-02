@@ -8,7 +8,6 @@ public class Ingredient
     
     [Required]
     public string Name { get; set; }
-
     
     
 }

@@ -57,6 +57,49 @@ namespace DataAcessLayer.Migrations
 
                     b.ToTable("Recipes");
                 });
+
+            modelBuilder.Entity("DataAcessLayer.Models.RecipeIngredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("RecipeIngredients");
+                });
+
+            modelBuilder.Entity("DataAcessLayer.Models.RecipeIngredient", b =>
+                {
+                    b.HasOne("DataAcessLayer.Models.Ingredient", "Ingredient")
+                        .WithMany()
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAcessLayer.Models.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Recipe");
+                });
 #pragma warning restore 612, 618
         }
     }
