@@ -9,6 +9,15 @@ namespace FOODappAPI.Controllers
     public class RecipesController : ControllerBase
     {
         private readonly IRecipeService _recipeService;
+     
         
+        
+        // POST api/<api>
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] RecipeDTO recipeDTO)
+        {
+            var recipe =  _recipeService.CreateRecipe(recipeDTO);
+            return recipe == null ? Problem() : Ok(recipe);
+        }
     }
 }
