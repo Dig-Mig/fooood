@@ -1,6 +1,4 @@
 using DataAcessLayer.Enums;
-using AutoMapper;
-using DataAcessLayer.Models;
 
 namespace FOODappApplication.Recipes;
 
@@ -13,10 +11,3 @@ public class RecipeDTO
     public KitchenType KitchenType { get; set; }
 }
 
-public class MappingProfile : Profile
-{
-    public MappingProfile()
-    {
-        CreateMap<RecipeDTO, Recipe>();
-    }
-}

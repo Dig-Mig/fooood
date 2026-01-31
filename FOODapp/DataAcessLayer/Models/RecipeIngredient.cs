@@ -13,5 +13,4 @@ public class RecipeIngredient
     public Ingredient Ingredient { get; set; }
     
     public int Amount { get; set; }
-    
 }

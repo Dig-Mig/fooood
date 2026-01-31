@@ -1,31 +1,44 @@
+using DataAcessLayer.Data;
 using DataAcessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAcessLayer.Repositories;
 
 public class RecipeRepository : IRecipeRepository
 {
-    public Task<List<Recipe>> GetAllRecipes()
+    private readonly FOODContext _context;
+
+    public RecipeRepository(FOODContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+    public async Task<List<Recipe>> GetAllRecipes()
+    {
+        return await _context.Recipes.ToListAsync();
     }
 
-    public Task<Recipe?> GetRecipeById(int id)
+    public async Task<Recipe?> GetRecipeById(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Recipes.FindAsync(id);
     }
 
-    public Task<Recipe> PostRecipe(Recipe recipe)
+    public async Task<Recipe> PostRecipe(Recipe recipe)
     {
-        throw new NotImplementedException();
+        await _context.Recipes.AddAsync(recipe);
+        await _context.SaveChangesAsync();
+        return recipe;
     }
 
-    public Task<Recipe?> UpdateRecipe(Recipe recipe)
+    public async Task<Recipe?> UpdateRecipe(Recipe recipe)
     {
-        throw new NotImplementedException();
+        _context.Recipes.Update(recipe);
+        await _context.SaveChangesAsync();
+        return recipe;
     }
 
-    public Task<int?> DeleteRecipe(Recipe recipe)
+    public async Task<int?> DeleteRecipe(Recipe recipe)
     {
-        throw new NotImplementedException();
+        _context.Remove(recipe);
+        return await _context.SaveChangesAsync();
     }
 }
