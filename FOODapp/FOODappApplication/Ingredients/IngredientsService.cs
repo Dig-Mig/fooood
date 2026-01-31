@@ -42,10 +42,6 @@ public class IngredientsService: IIngredientsService
         if (ingredient == null) return null;
 
         if (ingredientUpdates.Name is not null) ingredient.Name = ingredientUpdates.Name;
-        if (ingredientUpdates.Stock is not null) ingredient.Stock = ingredientUpdates.Stock;
-        if (ingredientUpdates.Quantity is not null) ingredient.Quantity = ingredientUpdates.Quantity;
-        if (ingredientUpdates.QuantityUnit is not null) ingredient.QuantityUnit = ingredientUpdates.QuantityUnit;
-
         return await _repository.UpdateIngredient(ingredient);
     }
     
@@ -55,12 +51,7 @@ public class IngredientsService: IIngredientsService
         var ingredient = new Ingredient()
         {
             Name = ingredientDTO.Name,
-            Stock = ingredientDTO.Stock,
-            Quantity = ingredientDTO.Quantity,
-            QuantityUnit = ingredientDTO.QuantityUnit
         };
         return ingredient;
     }
-    
-
 }
