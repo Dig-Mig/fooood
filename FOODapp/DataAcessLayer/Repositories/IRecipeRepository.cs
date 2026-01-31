@@ -9,4 +9,5 @@ public interface IRecipeRepository
     Task<Recipe> PostRecipe(Recipe recipe);
     Task<Recipe?> UpdateRecipe(Recipe recipe);
     Task<int?> DeleteRecipe(Recipe recipe);
+    Task<List<RecipeIngredient>> GetRecipieIngcredients(int id);
 }
