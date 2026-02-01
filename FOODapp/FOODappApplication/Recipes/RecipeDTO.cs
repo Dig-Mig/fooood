@@ -2,7 +2,6 @@ using DataAcessLayer.Enums;
 using DataAcessLayer.Models;
 
 namespace FOODappApplication.Recipes;
-
 public class RecipeDTO
 {
     public string Name { get; set; }
@@ -12,6 +11,9 @@ public class RecipeDTO
     public KitchenType KitchenType { get; set; }
     
     public List<RecipeIngredientDTO> Ingredient { get; set; }
+    
+    
+    
 }
 
 public class RecipeIngredientDTO

@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using DataAcessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddDataAcessLayer();
+builder.Services.AddAutoMapper(cfg => cfg.LicenseKey = builder.Configuration.GetValue<string>("AutomapperLicense"), typeof(Program));
+var test = builder.Configuration.GetValue<string>("AutomapperLicense");
 
 
 var app = builder.Build();
