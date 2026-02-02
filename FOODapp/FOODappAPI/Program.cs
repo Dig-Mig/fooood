@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using DataAcessLayer;
+using FOODappApplication.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddDataAcessLayer();
-builder.Services.AddAutoMapper(cfg => cfg.LicenseKey = builder.Configuration.GetValue<string>("AutomapperLicense"), typeof(Program));
-var test = builder.Configuration.GetValue<string>("AutomapperLicense");
+builder.Services.AddAutoMapper(cfg => cfg.LicenseKey = builder.Configuration.GetValue<string>("AutomapperLicense"), typeof(AutomapperProfiles).Assembly);
+
 
 
 var app = builder.Build();
