@@ -1,3 +1,4 @@
+using AutoMapper;
 using DataAcessLayer.Models;
 using DataAcessLayer.Repositories;
 using FOODappApplication.Recipes;
@@ -10,18 +11,21 @@ namespace FOODappAPI.Controllers
     public class RecipesController : ControllerBase
     {
         private readonly IRecipeService _recipeService;
+        private readonly IMapper _mapper;
 
-        public RecipesController(IRecipeRepository recipeRepository)
+        public RecipesController(IRecipeRepository recipeRepository , IMapper mapper)
         {
             _recipeService = new RecipeService(recipeRepository);
+            _mapper = mapper;
         }
         
         // GET api/<api>
         [HttpGet]
-        public async Task<IEnumerable<Recipe>> Get()
+        public async Task<IEnumerable<RecipeDTO>> Get()
         {
             var recipes = await _recipeService.GetRecipes();
-            return recipes;
+            var dto = _mapper.Map<IEnumerable<RecipeDTO>>(recipes);
+            return dto;
         }
 
         // GET api/<api>/5

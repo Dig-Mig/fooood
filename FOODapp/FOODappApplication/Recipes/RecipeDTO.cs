@@ -1,5 +1,7 @@
+using AutoMapper;
 using DataAcessLayer.Enums;
 using DataAcessLayer.Models;
+using FOODappApplication.Ingredients;
 
 namespace FOODappApplication.Recipes;
 public class RecipeDTO
@@ -11,14 +13,11 @@ public class RecipeDTO
     public KitchenType KitchenType { get; set; }
     
     public List<RecipeIngredientDTO> Ingredient { get; set; }
-    
-    
-    
 }
 
 public class RecipeIngredientDTO
 {
-    public Ingredient Ingredient { get; set; }
+    public IngredientDTO Ingredient { get; set; }
     public int Amount { get; set; }
 }
 

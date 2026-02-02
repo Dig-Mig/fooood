@@ -59,29 +59,29 @@ public class RecipeService : IRecipeService
         return recipe;
     }
     
-    private async Task<RecipeDTO> MapToDTO(Recipe recipe)
-    {
-        var recipeDTO = new RecipeDTO()
-        {
-            Name = recipe.Name,
-            Link = recipe.Link,
-            Description = recipe.Description,
-            Servings =  recipe.Servings,
-            KitchenType =  recipe.KitchenType,
-            Ingredient = new List<RecipeIngredientDTO>()
-            
-        };
-        
-        
-        foreach (var ingcredient in await _repository.GetRecipieIngcredients(recipe.Id) )
-        {
-            recipeDTO.Ingredient.Add(new RecipeIngredientDTO()
-            {
-                Amount = ingcredient.Amount,
-                Ingredient = ingcredient.Ingredient
-            });
-        }
-            
-        return  recipeDTO;
-    }
+    //private async Task<RecipeDTO> MapToDTO(Recipe recipe)
+    //{
+    //    var recipeDTO = new RecipeDTO()
+    //    {
+    //        Name = recipe.Name,
+    //        Link = recipe.Link,
+    //        Description = recipe.Description,
+    //        Servings =  recipe.Servings,
+    //        KitchenType =  recipe.KitchenType,
+    //        Ingredient = new List<RecipeIngredientDTO>()
+    //        
+    //    };
+    //    
+    //    
+    //    foreach (var ingcredient in await _repository.GetRecipieIngcredients(recipe.Id) )
+    //    {
+    //        recipeDTO.Ingredient.Add(new RecipeIngredientDTO()
+    //        {
+    //            Amount = ingcredient.Amount,
+    //            Ingredient = ingcredient.Ingredient
+    //        });
+    //    }
+    //        
+    //    return  recipeDTO;
+    //}
 }
