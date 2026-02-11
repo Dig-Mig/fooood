@@ -15,7 +15,7 @@ namespace FOODappAPI.Controllers
 
         public RecipesController(IRecipeRepository recipeRepository , IMapper mapper)
         {
-            _recipeService = new RecipeService(recipeRepository);
+            _recipeService = new RecipeService(recipeRepository,mapper);
             _mapper = mapper;
         }
         
@@ -32,24 +32,25 @@ namespace FOODappAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var recipe = _recipeService.GetRecipe(id);
-            return recipe == null ? Problem() : Ok(recipe);
+            var recipe = await _recipeService.GetRecipe(id);
+            return recipe == null ? Problem() : Ok(_mapper.Map<RecipeDTO>(recipe));
         }
         
         // POST api/<api>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] RecipeDTO recipeDTO)
         {
-            var recipe =  _recipeService.CreateRecipe(recipeDTO);
-            return recipe == null ? Problem() : Ok(recipe);
+            var recipe = _mapper.Map<Recipe>(recipeDTO); 
+            var result =  _recipeService.CreateRecipe(recipe);
+            return result == null ? Problem() : Ok();
         }
 
         // Put api/<api>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] RecipeDTO recipeDTO)
+        public async Task<IActionResult> Put(int id, [FromBody] RecipeUpdateDTO recipeUpdateDtoDTO)
         {
-            var recipe = await _recipeService.UpdateRecipeById(id, recipeDTO);
-            return recipe == null ? Problem() : Ok(recipeDTO);
+            var recipe = await _recipeService.UpdateRecipeById(id, recipeUpdateDtoDTO);
+            return recipe == null ? NotFound() : Ok(_mapper.Map<RecipeDTO>(recipe));
         }
 
         // DELETE api/<api>/5
