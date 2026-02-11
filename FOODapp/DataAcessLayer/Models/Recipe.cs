@@ -11,6 +11,8 @@ public class Recipe
     public string? Description { get; set; }
     public int Servings { get; set; }
     public KitchenType KitchenType { get; set; }
+    
+    public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
 
 }
 

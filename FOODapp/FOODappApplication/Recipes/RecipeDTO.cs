@@ -12,7 +12,7 @@ public class RecipeDTO
     public int Servings { get; set; }
     public KitchenType KitchenType { get; set; }
     
-    public List<RecipeIngredientDTO> Ingredient { get; set; }
+    public List<RecipeIngredientDTO> RecipeIngredients { get; set; }
 }
 
 public class RecipeIngredientDTO

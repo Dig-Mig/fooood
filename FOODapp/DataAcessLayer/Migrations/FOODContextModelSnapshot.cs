@@ -14,7 +14,11 @@ namespace DataAcessLayer.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true);
 
             modelBuilder.Entity("DataAcessLayer.Models.Ingredient", b =>
                 {
@@ -75,7 +79,8 @@ namespace DataAcessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IngredientId");
+                    b.HasIndex("IngredientId")
+                        .IsUnique();
 
                     b.HasIndex("RecipeId");
 
@@ -85,13 +90,13 @@ namespace DataAcessLayer.Migrations
             modelBuilder.Entity("DataAcessLayer.Models.RecipeIngredient", b =>
                 {
                     b.HasOne("DataAcessLayer.Models.Ingredient", "Ingredient")
-                        .WithMany()
-                        .HasForeignKey("IngredientId")
+                        .WithOne("RecipeIngredient")
+                        .HasForeignKey("DataAcessLayer.Models.RecipeIngredient", "IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DataAcessLayer.Models.Recipe", "Recipe")
-                        .WithMany()
+                        .WithMany("RecipeIngredients")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -99,6 +104,17 @@ namespace DataAcessLayer.Migrations
                     b.Navigation("Ingredient");
 
                     b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("DataAcessLayer.Models.Ingredient", b =>
+                {
+                    b.Navigation("RecipeIngredient")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAcessLayer.Models.Recipe", b =>
+                {
+                    b.Navigation("RecipeIngredients");
                 });
 #pragma warning restore 612, 618
         }

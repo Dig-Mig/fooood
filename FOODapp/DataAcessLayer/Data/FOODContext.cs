@@ -13,6 +13,7 @@ public class FOODContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=FOOD.db");
+        
+        optionsBuilder.UseLazyLoadingProxies().UseSqlite("Data Source=FOOD.db");
     }
 }
