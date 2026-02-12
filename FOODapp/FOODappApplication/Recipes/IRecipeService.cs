@@ -6,7 +6,7 @@ public interface IRecipeService
 {
     Task<List<Recipe>> GetRecipes();
     Task<Recipe>? GetRecipe(int id);
-    Task<Recipe> CreateRecipe(RecipeDTO recipeDTO);
-    Task<Recipe?> UpdateRecipeById(int id, RecipeDTO recipeUpdates);
+    Task<Recipe> CreateRecipe(Recipe recipe);
+    Task<Recipe?> UpdateRecipeById(int id, RecipeUpdateDTO recipeUpdates);
     Task<int?> DeleteRecipeById(int id);
 }

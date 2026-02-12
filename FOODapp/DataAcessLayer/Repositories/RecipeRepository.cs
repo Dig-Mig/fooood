@@ -41,4 +41,11 @@ public class RecipeRepository : IRecipeRepository
         _context.Remove(recipe);
         return await _context.SaveChangesAsync();
     }
+    
+    public async Task<List<RecipeIngredient>> GetRecipieIngcredients(int id)
+    {
+        List<RecipeIngredient> recipeIngredients = await _context.RecipeIngredients
+            .Where(recipeIngredient => recipeIngredient.Id == id).ToListAsync();
+        return recipeIngredients;
+    }
 }

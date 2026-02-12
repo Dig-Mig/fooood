@@ -1,4 +1,5 @@
-﻿using DataAcessLayer.Models;
+﻿using AutoMapper;
+using DataAcessLayer.Models;
 using DataAcessLayer.Repositories;
 
 namespace FOODappApplication.Ingredients;
@@ -6,9 +7,11 @@ namespace FOODappApplication.Ingredients;
 public class IngredientsService: IIngredientsService
 {
     private IIngredientsRepository _repository;
-    public IngredientsService(IIngredientsRepository repository)
+    private IMapper _mapper;
+    public IngredientsService(IIngredientsRepository repository , IMapper mapper)
     {
-           _repository = repository; 
+           _repository = repository;
+           _mapper = mapper;
     }
     public async Task<List<Ingredient>> GetIngredients()
     {
@@ -23,16 +26,20 @@ public class IngredientsService: IIngredientsService
 
     public async Task<Ingredient> CreateIngredient(IngredientDTO ingredientDTO)
     {   
-        var ingredient = MapFromDTO(ingredientDTO);
+        var ingredient = _mapper.Map<Ingredient>(ingredientDTO);
         return await _repository.PostIngredient(ingredient);
     }
 
 
-    public async Task<int?> DeleteIngredientById(int id)
+    public async Task<bool?> DeleteIngredientById(int id)
     {
         var ingredient = await _repository.GetIngredientById(id);
-        if (ingredient == null) return null;
-        else { return await _repository.DeleteIngredient(ingredient); }
+        if (ingredient == null) return false;
+        else
+        {
+            await _repository.DeleteIngredient(ingredient);
+            return true;
+        }
         
     }
     
@@ -46,12 +53,5 @@ public class IngredientsService: IIngredientsService
     }
     
     
-    private Ingredient MapFromDTO(IngredientDTO ingredientDTO)
-    {
-        var ingredient = new Ingredient()
-        {
-            Name = ingredientDTO.Name,
-        };
-        return ingredient;
-    }
+
 }
