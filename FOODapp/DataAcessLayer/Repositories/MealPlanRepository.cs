@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAcessLayer.Repositories;
 
-public class MadplanRepository : IMealPlanRepository
+public class MealPlanRepository : IMealPlanRepository
 {
     
     private readonly FOODContext _context;
 
-    public MadplanRepository(FOODContext context)
+    public MealPlanRepository(FOODContext context)
     {
         _context = context;
     }
