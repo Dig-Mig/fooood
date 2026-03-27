@@ -52,7 +52,7 @@ namespace DataAcessLayer.Migrations
 
                     b.HasIndex("recipeId");
 
-                    b.ToTable("Madplans");
+                    b.ToTable("MealPlans");
                 });
 
             modelBuilder.Entity("DataAcessLayer.Models.Recipe", b =>

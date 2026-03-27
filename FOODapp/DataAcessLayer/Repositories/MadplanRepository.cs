@@ -1,5 +1,6 @@
 using DataAcessLayer.Data;
 using DataAcessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAcessLayer.Repositories;
 
@@ -15,7 +16,7 @@ public class MadplanRepository : IMealPlanRepository
 
     public Task<List<MealPlan>> GetMealPlan()
     {
-        throw new NotImplementedException();
+        return _context.MealPlans.ToListAsync();
     }
 
     public Task<MealPlan> GetMealPlan(int id)

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAcessLayer.Migrations
 {
     [DbContext(typeof(FOODContext))]
-    [Migration("20260327201427_Ading_mealPlan_table")]
-    partial class Ading_mealPlan_table
+    [Migration("20260327204258_implementing_MealPlan_table")]
+    partial class implementing_MealPlan_table
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace DataAcessLayer.Migrations
 
                     b.HasIndex("recipeId");
 
-                    b.ToTable("Madplans");
+                    b.ToTable("MealPlans");
                 });
 
             modelBuilder.Entity("DataAcessLayer.Models.Recipe", b =>
