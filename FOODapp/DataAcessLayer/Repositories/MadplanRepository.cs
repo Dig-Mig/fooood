@@ -14,38 +14,44 @@ public class MadplanRepository : IMealPlanRepository
         _context = context;
     }
 
-    public Task<List<MealPlan>> GetMealPlan()
+    public async Task<List<MealPlan>> GetMealPlan()
     {
-        return _context.MealPlans.ToListAsync();
+        return await _context.MealPlans.ToListAsync();
     }
 
-    public Task<MealPlan> GetMealPlan(int id)
+    public async Task<MealPlan> GetMealPlan(int id)
     {
-        throw new NotImplementedException();
+        return await _context.MealPlans.FirstOrDefaultAsync(mealplan => mealplan.Id == id);
     }
 
-    public Task<MealPlan> GetMealPlanByDate(DateOnly WeekYear)
+    public async Task<MealPlan> GetMealPlanByDate(DateOnly WeekYear)
     {
-        throw new NotImplementedException();
+        return await _context.MealPlans.FirstOrDefaultAsync(mealplan => mealplan.Date == WeekYear);
     }
 
-    public Task<List<MealPlan>> GetMealPlanByDateRange(DateOnly startDate, DateOnly endDate)
+    public async Task<List<MealPlan>> GetMealPlanByDateRange(DateOnly startDate, DateOnly endDate)
     {
-        throw new NotImplementedException();
+        return await _context.MealPlans.Where(mealplan => mealplan.Date >= startDate && mealplan.Date <= endDate ).ToListAsync(); 
     }
 
-    public Task<bool> MakeMealPlan(MealPlan madplan)
+    public async Task<int> MakeMealPlan(MealPlan madplan)
     {
-        throw new NotImplementedException();
+        var result =  await _context.MealPlans.AddAsync(madplan);
+        await _context.SaveChangesAsync();
+        return result.Entity.Id;
     }
 
-    public Task<bool> DeleteMealPlan(MealPlan madplan)
+    public async Task<bool> DeleteMealPlan(MealPlan madplan)
     {
-        throw new NotImplementedException();
+        _context.MealPlans.Remove(madplan);
+
+        return await _context.SaveChangesAsync() != 0 ? true : false;
     }
 
-    public Task<bool> UpdateMealPlan(MealPlan madplan)
+    public async Task<bool> UpdateMealPlan(MealPlan madplan)
     {
-        throw new NotImplementedException();
+        _context.MealPlans.Update(madplan);
+
+        return await _context.SaveChangesAsync() != 0 ? true : false;
     }
 }
