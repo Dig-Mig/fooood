@@ -12,9 +12,4 @@ public class FOODContext : DbContext
     public DbSet<RecipeIngredient> RecipeIngredients { get; set; } = null!;
     public DbSet<MealPlan> Madplans { get; set; } = null!;
     
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        
-        optionsBuilder.UseLazyLoadingProxies().UseSqlite("Data Source=FOOD.db");
-    }
 }

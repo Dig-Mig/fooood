@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
 using DataAcessLayer;
+using DataAcessLayer.Data;
 using FOODappApplication.Profiles;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddDataAcessLayer();
 builder.Services.AddAutoMapper(cfg => cfg.LicenseKey = builder.Configuration.GetValue<string>("AutomapperLicense"), typeof(AutomapperProfiles).Assembly);
-
+builder.Services.AddDbContext<FOODContext>(options => options.UseLazyLoadingProxies().UseSqlite("Data Source=FOOD.db"));
 
 
 var app = builder.Build();
