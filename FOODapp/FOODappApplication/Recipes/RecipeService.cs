@@ -4,52 +4,39 @@ using DataAcessLayer.Repositories;
 
 namespace FOODappApplication.Recipes;
 
-public class RecipeService : IRecipeService
+public class RecipeService(IRecipeRepository repository, IMapper mapper) : IRecipeService
 {
-    private IRecipeRepository _repository;
-    private IMapper _mapper;
-    private IRecipeService _recipeServiceImplementation;
-
-    public RecipeService(IRecipeRepository repository, IMapper mapper)
-    {
-        _repository = repository;
-        _mapper = mapper;
-
-    }
     public async Task<List<Recipe>> GetRecipes()
     {
-        var recipes = await _repository.GetAllRecipes();
+        var recipes = await repository.GetAllRecipes();
         return recipes;
     }
 
     public async Task<Recipe>? GetRecipe(int id)
     {
-        var recipe = await _repository.GetRecipeById(id);
+        var recipe = await repository.GetRecipeById(id);
         return recipe;
     }
 
     public async Task<Recipe> CreateRecipe(Recipe recipe)
     {
-        return await _repository.PostRecipe(recipe);
+        return await repository.PostRecipe(recipe);
     }
     
 
     public async Task<Recipe?> UpdateRecipeById(int id, RecipeUpdateDTO recipeUpdates)
     {
-        var recipe = await _repository.GetRecipeById(id);
+        var recipe = await repository.GetRecipeById(id);
         if (recipe == null) return null;
-        var newRecipe = _mapper.Map<RecipeUpdateDTO,Recipe>(recipeUpdates, recipe);
-        var Updatedrecipe = await _repository.UpdateRecipe(newRecipe);
-        return  Updatedrecipe;
+        var newRecipe = mapper.Map<RecipeUpdateDTO,Recipe>(recipeUpdates, recipe);
+        var  updatedRecipe = await repository.UpdateRecipe(newRecipe);
+        return   updatedRecipe;
     }
 
     public async Task<int?> DeleteRecipeById(int id)
     {
-        var recipe = await _repository.GetRecipeById(id);
+        var recipe = await repository.GetRecipeById(id);
         if (recipe == null) return null;
-        else { return await _repository.DeleteRecipe(recipe); }
+        else { return await repository.DeleteRecipe(recipe); }
     }
-
-    
-
- }
+}

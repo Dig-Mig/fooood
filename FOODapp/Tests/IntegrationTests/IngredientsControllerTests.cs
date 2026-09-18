@@ -9,7 +9,6 @@ namespace IntegrationTests;
 
 public class IngredientsControllerTests(TestContextFixture fixture) : IClassFixture<TestContextFixture>
 {
-    private readonly TestContextFixture _fixture = fixture;
     private readonly IngredientsController _controller = new IngredientsController(new IngredientsRepository(fixture.FoodContext), fixture.Mapper);
     
     
