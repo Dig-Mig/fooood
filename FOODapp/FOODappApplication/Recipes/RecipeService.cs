@@ -28,7 +28,7 @@ public class RecipeService(IRecipeRepository repository, IMapper mapper) : IReci
     {
         var recipe = await repository.GetRecipeById(id);
         if (recipe == null) return null;
-        var newRecipe = mapper.Map<RecipeUpdateDTO,Recipe>(recipeUpdates, recipe);
+        var newRecipe = mapper.Map(recipeUpdates, recipe);
         var  updatedRecipe = await repository.UpdateRecipe(newRecipe);
         return   updatedRecipe;
     }
