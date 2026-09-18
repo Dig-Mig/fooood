@@ -43,6 +43,7 @@ public class MealPlanRepository(FOODContext context) : IMealPlanRepository
     {
         context.MealPlans.Update(mealPlan);
         await context.SaveChangesAsync();
-        return mealPlan;
+        var updatedMealPlan =  await context.MealPlans.FindAsync(mealPlan.Id);
+        return updatedMealPlan;
     }
 }

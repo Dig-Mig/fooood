@@ -27,7 +27,8 @@ public class RecipeRepository(FOODContext context) : IRecipeRepository
     {
         context.Recipes.Update(recipe);
         await context.SaveChangesAsync();
-        return recipe;
+        var updatedRecipe = await context.Recipes.FindAsync(recipe.Id);
+        return updatedRecipe;
     }
 
     public async Task<int?> DeleteRecipe(Recipe recipe)
