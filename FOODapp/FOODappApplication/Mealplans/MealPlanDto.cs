@@ -1,12 +1,9 @@
 using FOODappApplication.Recipes;
 
-namespace FOODappApplication.Mealplans;
+namespace FOODappApplication.MealPlans;
 
 public class MealPlanDto
 {
-    
     public DateOnly Date { get; set; }
-    
-    public virtual RecipeDTO recipe { get; set; }
-
+    public RecipeDTO Recipe { get; set; }
 }

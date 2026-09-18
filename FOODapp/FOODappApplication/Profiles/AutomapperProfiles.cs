@@ -2,6 +2,7 @@ using AutoMapper;
 using DataAcessLayer.Models;
 using FOODappApplication.Recipes;
 using FOODappApplication.Ingredients;
+using FOODappApplication.MealPlans;
 
 namespace FOODappApplication.Profiles;
 
@@ -17,6 +18,11 @@ public class AutomapperProfiles : Profile
         CreateMap<IngredientDTO, Ingredient>();
         CreateMap<IngredientUpdateDTO, Ingredient>();
         CreateMap<RecipeUpdateDTO, Recipe>();
-
+        CreateMap<MealPlanDto, MealPlan>();
+        CreateMap<MealPlan, MealPlanDto>();
+        CreateMap<RecipeIngredientUpdateDTO, RecipeIngredient>();
+        CreateMap<RecipeIngredient, RecipeIngredientUpdateDTO>();
+        CreateMap<MealPlanUpdateDto, MealPlan>();
+        CreateMap<MealPlan, MealPlanUpdateDto>();
     }
 }
