@@ -6,8 +6,8 @@ public interface IIngredientsService
 {
     Task<List<Ingredient>> GetIngredients();
     Task<Ingredient>? GetIngredient(int id);
-    Task<Ingredient> CreateIngredient(IngredientDTO ingredientDTO);
-    Task<Ingredient?> UpdateIngredientById(int id, IngredientDTO ingredientUpdates);
+    Task<Ingredient> CreateIngredient(IngredientUpdateDTO ingredientUpdateDTO);
+    Task<Ingredient?> UpdateIngredientById(int id, IngredientUpdateDTO ingredientUpdates);
     Task<bool?> DeleteIngredientById(int id);
 
 

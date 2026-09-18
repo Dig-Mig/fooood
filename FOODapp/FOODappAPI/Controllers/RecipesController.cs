@@ -31,9 +31,9 @@ namespace FOODappAPI.Controllers
         
         // POST api/<api>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] RecipeDTO recipeDTO)
+        public async Task<IActionResult> Post([FromBody] RecipeUpdateDTO recipeUpdateDTO)
         {
-            var recipe = mapper.Map<Recipe>(recipeDTO); 
+            var recipe = mapper.Map<Recipe>(recipeUpdateDTO); 
             var result =  _recipeService.CreateRecipe(recipe);
             return result == null ? Problem() : Ok();
         }

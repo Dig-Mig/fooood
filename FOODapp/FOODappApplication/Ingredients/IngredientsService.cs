@@ -17,9 +17,9 @@ public class IngredientsService(IIngredientsRepository repository, IMapper mappe
         return  ingredient;
     }
 
-    public async Task<Ingredient> CreateIngredient(IngredientDTO ingredientDTO)
+    public async Task<Ingredient> CreateIngredient(IngredientUpdateDTO ingredientUpdateDTO)
     {   
-        var ingredient = mapper.Map<Ingredient>(ingredientDTO);
+        var ingredient = mapper.Map<Ingredient>(ingredientUpdateDTO);
         return await repository.PostIngredient(ingredient);
     }
 
@@ -36,7 +36,7 @@ public class IngredientsService(IIngredientsRepository repository, IMapper mappe
         
     }
     
-    public async Task<Ingredient?> UpdateIngredientById(int id, IngredientDTO ingredientUpdates)
+    public async Task<Ingredient?> UpdateIngredientById(int id, IngredientUpdateDTO ingredientUpdates)
     {
         var ingredient = await repository.GetIngredientById(id);
         if (ingredient == null) return null;
@@ -45,6 +45,4 @@ public class IngredientsService(IIngredientsRepository repository, IMapper mappe
         return await repository.UpdateIngredient(ingredient);
     }
     
-    
-
 }
