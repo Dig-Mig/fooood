@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAcessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class Ading_mealPlan_table : Migration
+    public partial class implementing_MealPlan_table : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Madplans",
+                name: "MealPlans",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -22,9 +22,9 @@ namespace DataAcessLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Madplans", x => x.Id);
+                    table.PrimaryKey("PK_MealPlans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Madplans_Recipes_recipeId",
+                        name: "FK_MealPlans_Recipes_recipeId",
                         column: x => x.recipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
@@ -32,8 +32,8 @@ namespace DataAcessLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Madplans_recipeId",
-                table: "Madplans",
+                name: "IX_MealPlans_recipeId",
+                table: "MealPlans",
                 column: "recipeId");
         }
 
@@ -41,7 +41,7 @@ namespace DataAcessLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Madplans");
+                name: "MealPlans");
         }
     }
 }

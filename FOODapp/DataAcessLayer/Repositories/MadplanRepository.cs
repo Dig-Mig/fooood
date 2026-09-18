@@ -1,49 +1,50 @@
 using DataAcessLayer.Data;
 using DataAcessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAcessLayer.Repositories;
 
-public class MadplanRepository : IMadplanRepository
+public class MadplanRepository : IMealPlanRepository
 {
     
     private readonly FOODContext _context;
 
-    public MadplanRepository(FOODContext contrex)
+    public MadplanRepository(FOODContext context)
     {
-        _context = contrex;
-    }
-    public Task<List<MealPlan>> GetMadlans()
-    {
-        throw new NotImplementedException();
-        
+        _context = context;
     }
 
-    public Task<MealPlan> GetMadPlan(int id)
+    public Task<List<MealPlan>> GetMealPlan()
     {
-        throw new NotImplementedException();
+        return _context.MealPlans.ToListAsync();
     }
 
-    public Task<MealPlan> GetMadPlanByDate(DateOnly WeekYear)
+    public Task<MealPlan> GetMealPlan(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<MealPlan>> GetMadByDateRange(DateOnly startDate, DateOnly endDate)
+    public Task<MealPlan> GetMealPlanByDate(DateOnly WeekYear)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> MakeMadPlan(MealPlan mealPlan)
+    public Task<List<MealPlan>> GetMealPlanByDateRange(DateOnly startDate, DateOnly endDate)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteMadPlan(MealPlan mealPlan)
+    public Task<bool> MakeMealPlan(MealPlan madplan)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateMadPlan(MealPlan mealPlan)
+    public Task<bool> DeleteMealPlan(MealPlan madplan)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> UpdateMealPlan(MealPlan madplan)
     {
         throw new NotImplementedException();
     }
