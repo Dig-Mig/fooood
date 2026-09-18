@@ -37,7 +37,7 @@ namespace FOODappAPI.Controllers
 
         // POST api/<api>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] IngredientDTO ingredientDTO)
+        public async Task<IActionResult> Post([FromBody] IngredientUpdateDTO ingredientDTO)
         {
             var ingredient =  _ingredientsService.CreateIngredient(ingredientDTO);
             return ingredient == null ? Problem() : NoContent();
@@ -45,7 +45,7 @@ namespace FOODappAPI.Controllers
 
         // PUT api/<api>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] IngredientDTO ingredientDTO)
+        public async Task<IActionResult> Put(int id, [FromBody] IngredientUpdateDTO ingredientDTO)
         {
             var ingredient = await _ingredientsService.UpdateIngredientById(id, ingredientDTO);
             
