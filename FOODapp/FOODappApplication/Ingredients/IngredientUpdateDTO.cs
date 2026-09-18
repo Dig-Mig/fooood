@@ -1,8 +1,7 @@
 namespace FOODappApplication.Ingredients;
 
-public class IngredientDTO
+public class IngredientUpdateDTO
 {
-    public int Id { get; set; }
     public string Name { get; set; } = String.Empty;
     
 }

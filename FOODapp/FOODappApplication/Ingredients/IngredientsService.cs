@@ -24,9 +24,9 @@ public class IngredientsService: IIngredientsService
         return  ingredient;
     }
 
-    public async Task<Ingredient> CreateIngredient(IngredientDTO ingredientDTO)
+    public async Task<Ingredient> CreateIngredient(IngredientUpdateDTO ingredientUpdateDTO)
     {   
-        var ingredient = _mapper.Map<Ingredient>(ingredientDTO);
+        var ingredient = _mapper.Map<Ingredient>(ingredientUpdateDTO);
         return await _repository.PostIngredient(ingredient);
     }
 
@@ -43,7 +43,7 @@ public class IngredientsService: IIngredientsService
         
     }
     
-    public async Task<Ingredient?> UpdateIngredientById(int id, IngredientDTO ingredientUpdates)
+    public async Task<Ingredient?> UpdateIngredientById(int id, IngredientUpdateDTO ingredientUpdates)
     {
         var ingredient = await _repository.GetIngredientById(id);
         if (ingredient == null) return null;
