@@ -12,6 +12,7 @@ public static class DependencyInjection
         services.AddDbContext<FOODContext>();
         services.AddScoped<IIngredientsRepository, IngredientsRepository>();
         services.AddScoped<IRecipeRepository, RecipeRepository>();
+        services.AddScoped<IMealPlanRepository, MealPlanRepository>();
         return services;
     }
     
