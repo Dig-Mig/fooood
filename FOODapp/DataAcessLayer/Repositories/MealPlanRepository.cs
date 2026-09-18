@@ -4,54 +4,46 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAcessLayer.Repositories;
 
-public class MealPlanRepository : IMealPlanRepository
+public class MealPlanRepository(FOODContext context) : IMealPlanRepository
 {
-    
-    private readonly FOODContext _context;
-
-    public MealPlanRepository(FOODContext context)
-    {
-        _context = context;
-    }
-
     public async Task<List<MealPlan>> GetMealPlan()
     {
-        return await _context.MealPlans.ToListAsync();
+        return await context.MealPlans.ToListAsync();
     }
 
-    public async Task<MealPlan> GetMealPlan(int id)
+    public async Task<MealPlan?> GetMealPlan(int id)
     {
-        return await _context.MealPlans.FirstOrDefaultAsync(mealplan => mealplan.Id == id);
+        return await context.MealPlans.FirstOrDefaultAsync(mealPlan => mealPlan.Id == id);
     }
 
-    public async Task<MealPlan> GetMealPlanByDate(DateOnly WeekYear)
+    public async Task<MealPlan?> GetMealPlanByDate(DateOnly date)
     {
-        return await _context.MealPlans.FirstOrDefaultAsync(mealplan => mealplan.Date == WeekYear);
+        return await context.MealPlans.FirstOrDefaultAsync(mealPlan => mealPlan.Date == date);
     }
 
     public async Task<List<MealPlan>> GetMealPlanByDateRange(DateOnly startDate, DateOnly endDate)
     {
-        return await _context.MealPlans.Where(mealplan => mealplan.Date >= startDate && mealplan.Date <= endDate ).ToListAsync(); 
+        return await context.MealPlans.Where(mealPlan => mealPlan.Date >= startDate && mealPlan.Date <= endDate ).ToListAsync(); 
     }
 
-    public async Task<int> MakeMealPlan(MealPlan madplan)
+    public async Task<int> MakeMealPlan(MealPlan mealPlan)
     {
-        var result =  await _context.MealPlans.AddAsync(madplan);
-        await _context.SaveChangesAsync();
+        var result =  await context.MealPlans.AddAsync(mealPlan);
+        await context.SaveChangesAsync();
         return result.Entity.Id;
     }
 
-    public async Task<bool> DeleteMealPlan(MealPlan madplan)
+    public async Task<int?> DeleteMealPlan(MealPlan mealPlan)
     {
-        _context.MealPlans.Remove(madplan);
-
-        return await _context.SaveChangesAsync() != 0 ? true : false;
+        context.Remove(mealPlan);
+        return await context.SaveChangesAsync();
     }
 
-    public async Task<bool> UpdateMealPlan(MealPlan madplan)
+    public async Task<MealPlan?> UpdateMealPlan(MealPlan mealPlan)
     {
-        _context.MealPlans.Update(madplan);
-
-        return await _context.SaveChangesAsync() != 0 ? true : false;
+        context.MealPlans.Update(mealPlan);
+        await context.SaveChangesAsync();
+        var updatedMealPlan =  await context.MealPlans.FindAsync(mealPlan.Id);
+        return updatedMealPlan;
     }
 }

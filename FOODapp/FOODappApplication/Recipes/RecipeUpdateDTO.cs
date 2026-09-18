@@ -6,7 +6,6 @@ using FOODappApplication.Ingredients;
 namespace FOODappApplication.Recipes;
 public class RecipeUpdateDTO
 {
-    
     public string? Name { get; set; }
     public string? Link { get; set; }
     public string? Description { get; set; }

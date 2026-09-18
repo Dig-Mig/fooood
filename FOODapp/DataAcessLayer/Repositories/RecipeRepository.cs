@@ -4,47 +4,42 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAcessLayer.Repositories;
 
-public class RecipeRepository : IRecipeRepository
+public class RecipeRepository(FOODContext context) : IRecipeRepository
 {
-    private readonly FOODContext _context;
-
-    public RecipeRepository(FOODContext context)
-    {
-        _context = context;
-    }
     public async Task<List<Recipe>> GetAllRecipes()
     {
-        return await _context.Recipes.ToListAsync();
+        return await context.Recipes.ToListAsync();
     }
 
     public async Task<Recipe?> GetRecipeById(int id)
     {
-        return await _context.Recipes.FindAsync(id);
+        return await context.Recipes.FindAsync(id);
     }
 
     public async Task<Recipe> PostRecipe(Recipe recipe)
     {
-        await _context.Recipes.AddAsync(recipe);
-        await _context.SaveChangesAsync();
+        await context.Recipes.AddAsync(recipe);
+        await context.SaveChangesAsync();
         return recipe;
     }
 
     public async Task<Recipe?> UpdateRecipe(Recipe recipe)
     {
-        _context.Recipes.Update(recipe);
-        await _context.SaveChangesAsync();
-        return recipe;
+        context.Recipes.Update(recipe);
+        await context.SaveChangesAsync();
+        var updatedRecipe = await context.Recipes.FindAsync(recipe.Id);
+        return updatedRecipe;
     }
 
     public async Task<int?> DeleteRecipe(Recipe recipe)
     {
-        _context.Remove(recipe);
-        return await _context.SaveChangesAsync();
+        context.Remove(recipe);
+        return await context.SaveChangesAsync();
     }
     
     public async Task<List<RecipeIngredient>> GetRecipieIngcredients(int id)
     {
-        List<RecipeIngredient> recipeIngredients = await _context.RecipeIngredients
+        List<RecipeIngredient> recipeIngredients = await context.RecipeIngredients
             .Where(recipeIngredient => recipeIngredient.Id == id).ToListAsync();
         return recipeIngredients;
     }
