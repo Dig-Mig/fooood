@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FOODappApplication\FOODappApplication.csproj" />
+  </ItemGroup>
+
 </Project>

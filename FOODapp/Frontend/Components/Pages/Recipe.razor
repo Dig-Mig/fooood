@@ -1,0 +1,23 @@
+@page "/Recipe/{id:int}"
+@using FOODappApplication.Recipes
+@using Frontend.ApiClients
+@inject FoodClient _foodClient
+
+<MudCard>
+    <MudCardHeader>@recipe.Name</MudCardHeader>
+    <MudCardMedia Height="100"  Image="https://www.valdemarsro.dk/wp-content/2014/09/forloren-hare-1.jpg"></MudCardMedia>
+</MudCard>
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    
+    public RecipeDTO recipe { get; set; } = new RecipeDTO();
+    protected override async Task OnInitializedAsync()
+    {
+        recipe = await _foodClient.GetRecipe(id);
+        
+    }
+
+}

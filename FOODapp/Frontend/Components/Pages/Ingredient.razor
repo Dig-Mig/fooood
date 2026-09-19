@@ -1,0 +1,26 @@
+@page "/ingredient"
+@using FOODappApplication.Ingredients
+@using Frontend.ApiClients
+@inject FoodClient _FoodClient
+<h3>Ingredient</h3>
+
+<MudButton  @onclick="HentIngredients" >Hent Ingredients</MudButton>
+
+@foreach (var ingredient in ingredients)
+{
+    <MudText>@ingredient.Name</MudText>
+}
+
+
+
+@code {
+
+    public List<IngredientDTO> ingredients { get; set; } =new List<IngredientDTO>();
+
+
+    public async Task HentIngredients()
+    {
+        ingredients = await _FoodClient.GetIngredients();
+    }
+    
+}
